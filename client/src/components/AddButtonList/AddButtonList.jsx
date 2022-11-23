@@ -20,6 +20,9 @@ function AddButtonList({ colors, onAdd }) {
 			name: inputValue,
 			color: colors.filter((c) => c.id === selectedColor)[0].name,
 		})
+		setVisiblePopup(false)
+		setInputValue('')
+		setSelectedColor(colors[0].id)
 	}
 
 	return (
