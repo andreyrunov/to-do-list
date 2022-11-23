@@ -42,9 +42,8 @@ function App() {
 							active: true,
 						},
 					]}
-					isRemovable={true}
 				/>
-				<List items={lists} isRemovable={true} />
+				<List items={lists} onRemove={(item) => {alert(item.name)}} isRemovable={true} />
 				<AddButtonList onAdd={onAddList} colors={DB.colors} />
 			</div>
 			<div className='todo__tasks'>test task</div>
