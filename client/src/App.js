@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import AddButtonList from './components/AddButtonList/AddButtonList'
 import List from './components/List/List'
 import DB from './assets/db.json'
+import Tasks from './components/Tasks'
 
 function App() {
 	const [lists, setLists] = useState(
@@ -43,10 +44,18 @@ function App() {
 						},
 					]}
 				/>
-				<List items={lists} onRemove={(item) => {alert(item.name)}} isRemovable={true} />
+				<List
+					items={lists}
+					onRemove={(item) => {
+						alert(item.name)
+					}}
+					isRemovable={true}
+				/>
 				<AddButtonList onAdd={onAddList} colors={DB.colors} />
 			</div>
-			<div className='todo__tasks'>test task</div>
+			<div className='todo__tasks'>
+				<Tasks />
+			</div>
 		</div>
 	)
 }
