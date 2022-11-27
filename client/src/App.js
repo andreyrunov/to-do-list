@@ -53,8 +53,9 @@ function App() {
 				{lists && (
 					<List
 						items={lists}
-						onRemove={(item) => {
-							alert(item.name)
+						onRemove={(id) => {
+							const newLists = lists.filter(item => item.id !== id)
+							setLists(newLists)
 						}}
 						isRemovable={true}
 					/>
