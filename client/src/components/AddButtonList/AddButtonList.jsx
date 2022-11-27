@@ -1,28 +1,52 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
 import List from '../List/List'
 import Badge from '../Badge'
+
 import closeSvg from '../../assets/icons/close.svg'
+// import listSvg from '../../assets/icons/list.svg'
 
 import './AddButtonList.scss'
 
 function AddButtonList({ colors, onAdd }) {
 	const [visiblePopup, setVisiblePopup] = useState(false)
-	const [selectedColor, setSelectedColor] = useState(colors[0].id)
+	const [selectedColor, setSelectedColor] = useState(3)
+	const [isLoading, setIsLoading] = useState(false)
 	const [inputValue, setInputValue] = useState('')
 
-	const addList = () => {
-		if(!inputValue) {
-			alert('Введите название списка!');
-			return;
+	useEffect(() => {
+		if (Array.isArray(colors)) {
+			setSelectedColor(colors[0].id)
 		}
-		onAdd({
-			id: Math.random(),
-			name: inputValue,
-			color: colors.filter((c) => c.id === selectedColor)[0].name,
-		})
+	}, [colors])
+
+	const onClose = () => {
 		setVisiblePopup(false)
 		setInputValue('')
 		setSelectedColor(colors[0].id)
+	}
+
+	const addList = () => {
+		if (!inputValue) {
+			alert('Введите название списка!')
+			return
+		}
+		setIsLoading(true)
+		axios
+			.post('http://localhost:3001/lists', {
+				name: inputValue,
+				colorId: selectedColor,
+			})
+			.then(({ data }) => {
+				const color = colors.filter((c) => c.id === selectedColor)[0].name
+				const listObj = { ...data, color: { name: color } }
+				onAdd(listObj)
+				onClose()
+			})
+			.finally(() => {
+				setIsLoading(false)
+			})
 	}
 
 	return (
@@ -63,14 +87,14 @@ function AddButtonList({ colors, onAdd }) {
 			{visiblePopup && (
 				<div className='add-list__popup'>
 					<img
-						onClick={() => setVisiblePopup(false)}
+						onClick={onClose}
 						src={closeSvg}
 						alt='close'
 						className='add-list__popup-close-btn'
 					/>
 					<input
 						value={inputValue}
-						onChange={e => setInputValue(e.target.value)}
+						onChange={(e) => setInputValue(e.target.value)}
 						className='field'
 						type='text'
 						placeholder='Название списка'
@@ -85,7 +109,9 @@ function AddButtonList({ colors, onAdd }) {
 							/>
 						))}
 					</div>
-					<button onClick={addList} className='button'>Добавить</button>
+					<button onClick={addList} className='button'>
+						{isLoading ? 'Добавление...' : 'Добавить'}
+					</button>
 				</div>
 			)}
 		</div>
