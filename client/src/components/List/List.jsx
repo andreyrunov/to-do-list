@@ -1,5 +1,5 @@
 import React from 'react'
-import axios from 'axios';
+import axios from 'axios'
 import classNames from 'classnames'
 
 import './List.scss'
@@ -17,7 +17,6 @@ function List({ items, isRemovable, onClick, onRemove }) {
 	}
 	return (
 		<ul onClick={onClick} className='list'>
-			{console.log(items, '<------- тут')}
 			{items.map((item, index) => (
 				<li
 					key={index}
