@@ -26,13 +26,13 @@
 		}
 
 		#{$self}__remove-icon {
-		opacity: 0;
-		transition: opacity 0.15s ease-in-out;
+			opacity: 0;
+			transition: opacity 0.15s ease-in-out;
 
-		&:hover {
-			opacity: 1;
+			&:hover {
+				opacity: 1;
+			}
 		}
-	}
 
 		&.active {
 			background: #ffffff;
@@ -53,7 +53,9 @@
 
 	span {
 		flex: 1;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		width: 160px;
+		white-space: nowrap;
 	}
-
-	
 }
