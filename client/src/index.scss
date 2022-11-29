@@ -7,10 +7,10 @@
 }
 
 html {
-//   overflow: auto;
-//   margin-left: calc(100vw - 100%);
-//   margin-right: 0;
-overflow-y: scroll;
+	//   overflow: auto;
+	//   margin-left: calc(100vw - 100%);
+	//   margin-right: 0;
+	overflow-y: scroll;
 }
 
 body {
@@ -52,6 +52,7 @@ body {
 	border-radius: 4px;
 	padding: 8px 12px;
 	width: 100%;
+	font-size: 14px;
 
 	&:focus {
 		border-color: #dbdbdb;
@@ -65,11 +66,28 @@ body {
 	border: 0;
 	padding: 10px 20px;
 	cursor: pointer;
+	font-size: 14px;
 
 	&:hover {
 		background: darken($color: #4dd599, $amount: 5%);
 	}
 	&:active {
 		background: darken($color: #4dd599, $amount: 10%);
+	}
+
+	&:disabled {
+		background: #d8d8d8;
+	}
+	
+	&--grey {
+		background: #f4f6f8;
+		color: #444444;
+	
+		&:hover {
+			background: darken(#f4f6f8, 3%);
+		}
+		&:active {
+			background: darken(#f4f6f8, 6%);
+		}
 	}
 }

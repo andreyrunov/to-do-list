@@ -33,12 +33,23 @@ function App() {
 		setLists(newList)
 	}
 
+	const onAddTask = (listId, taskObj) => {
+		const newList = lists.map(item => {
+			if(item.id === listId) {
+				item.tasks = [...item.tasks, taskObj]
+			}
+			return item;
+		})
+		setLists(newList)
+	}
+
 	return (
 		<div className='todo'>
 			<div className='todo__sidebar'>
 				<List
 					items={[
 						{
+							active: true,
 							icon: (
 								<svg
 									width='14'
@@ -78,7 +89,11 @@ function App() {
 			</div>
 			<div className='todo__tasks'>
 				{lists && activeItem && (
-					<Tasks list={activeItem} onEditTitle={onEditListTitle} />
+					<Tasks
+						list={activeItem}
+						onAddTask={onAddTask}
+						onEditTitle={onEditListTitle}
+					/>
 				)}
 			</div>
 		</div>

@@ -6,16 +6,18 @@ import AddTaskForm from './AddTaskForm';
 import './Tasks.scss'
 import editSvg from '../../assets/icons/edit.svg'
 
-function Tasks({ list, onEditTitle }) {
+function Tasks({ list, onEditTitle, onAddTask }) {
 	function editTitle() {
 		const newTitle = window.prompt('Название списка', list.name)
 		if (newTitle) {
 			onEditTitle(list.id, newTitle)
-			axios.patch('http://localhost:3001/lists/' + list.id, {
-				name: newTitle,
-			}).catch(() => {
-				alert('Не удалось обновить название списка')
-			})
+			axios
+				.patch('http://localhost:3001/lists/' + list.id, {
+					name: newTitle,
+				})
+				.catch(() => {
+					alert('Не удалось обновить название списка')
+				})
 		}
 	}
 
@@ -51,7 +53,7 @@ function Tasks({ list, onEditTitle }) {
 						<input type='text' readOnly value={task.text} />
 					</div>
 				))}
-				<AddTaskForm />
+				<AddTaskForm list={list} onAddTask={onAddTask} />
 			</div>
 		</div>
 	)
