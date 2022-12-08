@@ -34,11 +34,6 @@
       "name": "Курс по ReactJS ToDo",
       "colorId": 7,
       "id": 7
-    },
-    {
-      "name": "Hello!",
-      "colorId": 4,
-      "id": 9
     }
   ],
   "tasks": [
@@ -143,6 +138,12 @@
       "text": "111177777",
       "completed": false,
       "id": 20
+    },
+    {
+      "listId": 5,
+      "text": "123123123123",
+      "completed": false,
+      "id": 21
     }
   ],
   "colors": [
