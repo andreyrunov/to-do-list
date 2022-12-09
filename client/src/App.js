@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { AddButtonList, List, Tasks } from './components'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 function App() {
 	const [lists, setLists] = useState(null)
 	const [colors, setColors] = useState(null)
 	const [activeItem, setActiveItem] = useState(null)
+	const navigate = useNavigate()
+	const location = useLocation()
 
 	useEffect(() => {
 		axios
@@ -18,6 +20,14 @@ function App() {
 			setColors(data)
 		})
 	}, [])
+
+	useEffect(() => {
+		const listId = location.pathname.split('lists/')[1]
+		if (lists) {
+			const list = lists.find((list) => list.id === Number(listId))
+			setActiveItem(list)
+		}
+	}, [lists, location.pathname])
 
 	const onEditListTitle = (id, title) => {
 		const newList = lists.map((item) => {
@@ -48,6 +58,10 @@ function App() {
 		<div className='todo'>
 			<div className='todo__sidebar'>
 				<List
+					onClickItem={(list) => {
+						// setActiveItem(item)
+						navigate(`/`)
+					}}
 					items={[
 						{
 							active: true,
@@ -76,8 +90,9 @@ function App() {
 							const newLists = lists.filter((item) => item.id !== id)
 							setLists(newLists)
 						}}
-						onClickItem={(item) => {
-							setActiveItem(item)
+						onClickItem={(list) => {
+							// setActiveItem(item)
+							navigate(`/lists/${list.id}`)
 						}}
 						activeItem={activeItem}
 						isRemovable={true}
