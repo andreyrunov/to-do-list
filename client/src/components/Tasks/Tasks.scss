@@ -4,6 +4,10 @@
 		margin-bottom: 40px;
 	}
 
+	a {
+		text-decoration: none;
+	}
+
 	&__title {
 		font-family: 'Montserrat';
 		font-weight: 700;
@@ -130,7 +134,7 @@
 			align-items: center;
 			margin-bottom: 15px;
 
-			input {
+			p {
 				margin-left: 15px;
 				border: 0;
 				font-size: 16px;
