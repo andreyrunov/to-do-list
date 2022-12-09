@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { AddButtonList, List, Tasks } from './components'
+import { Route, Routes } from 'react-router-dom'
 
 function App() {
 	const [lists, setLists] = useState(null)
@@ -19,10 +20,10 @@ function App() {
 	}, [])
 
 	const onEditListTitle = (id, title) => {
-		const newList = lists.map(item => {
-			if(item.id === id) {
+		const newList = lists.map((item) => {
+			if (item.id === id) {
 				item.name = title
-			} 
+			}
 			return item
 		})
 		setLists(newList)
@@ -34,11 +35,11 @@ function App() {
 	}
 
 	const onAddTask = (listId, taskObj) => {
-		const newList = lists.map(item => {
-			if(item.id === listId) {
+		const newList = lists.map((item) => {
+			if (item.id === listId) {
 				item.tasks = [...item.tasks, taskObj]
 			}
-			return item;
+			return item
 		})
 		setLists(newList)
 	}
@@ -87,13 +88,39 @@ function App() {
 				{colors && <AddButtonList onAdd={onAddList} colors={colors} />}
 			</div>
 			<div className='todo__tasks'>
-				{lists && activeItem && (
-					<Tasks
-						list={activeItem}
-						onAddTask={onAddTask}
-						onEditTitle={onEditListTitle}
-					/>
-				)}
+				<Routes>
+					<Route>
+						<Route
+							exact
+							path='/'
+							element={
+								lists &&
+								lists.map((list, index) => (
+									<Tasks
+										key={index}
+										list={list}
+										onAddTask={onAddTask}
+										onEditTitle={onEditListTitle}
+										withoutEmpty
+									/>
+								))
+							}
+						/>
+						<Route
+							path='lists/:id'
+							element={
+								lists &&
+								activeItem && (
+									<Tasks
+										list={activeItem}
+										onAddTask={onAddTask}
+										onEditTitle={onEditListTitle}
+									/>
+								)
+							}
+						/>
+					</Route>
+				</Routes>
 			</div>
 		</div>
 	)

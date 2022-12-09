@@ -1,12 +1,12 @@
 import React from 'react'
-import axios from 'axios';
+import axios from 'axios'
 
-import AddTaskForm from './AddTaskForm';
+import AddTaskForm from './AddTaskForm'
 
 import './Tasks.scss'
 import editSvg from '../../assets/icons/edit.svg'
 
-function Tasks({ list, onEditTitle, onAddTask }) {
+function Tasks({ list, onEditTitle, onAddTask, withoutEmpty }) {
 	function editTitle() {
 		const newTitle = window.prompt('Название списка', list.name)
 		if (newTitle) {
@@ -23,11 +23,11 @@ function Tasks({ list, onEditTitle, onAddTask }) {
 
 	return (
 		<div className='tasks'>
-			<h2 className='tasks__title'>
+			<h2 style={{ color: list.color.hex }} className='tasks__title'>
 				{list.name} <img onClick={editTitle} src={editSvg} alt='edit' />
 			</h2>
 			<div className='tasks__items'>
-				{!list.tasks.length && <h2>Задачи отсутствуют</h2>}
+				{!withoutEmpty && !list.tasks.length && <h2>Задачи отсутствуют</h2>}
 				{list.tasks.map((task) => (
 					<div key={task.id} className='tasks__items-row'>
 						<div className='checkbox'>

@@ -1,4 +1,9 @@
 .tasks {
+	// если это не последний список
+	&:not(:last-of-type) {
+		margin-bottom: 40px;
+	}
+
 	&__title {
 		font-family: 'Montserrat';
 		font-weight: 700;
@@ -82,7 +87,7 @@
 				margin-top: 15px;
 			}
 		}
-		
+
 		&-new {
 			display: flex;
 			align-items: center;
