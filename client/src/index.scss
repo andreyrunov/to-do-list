@@ -23,8 +23,8 @@ body {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	width: 750px;
-	height: 530px;
+	width: calc(100vw - 60px);
+	height: calc(100vh - 100px);
 	transform: translate(-50%, -50%);
 	box-shadow: 1px 2px 20px #d4d4d4;
 	border-radius: 10px;
@@ -33,16 +33,30 @@ body {
 
 	&__sidebar {
 		background-color: #f4f6f8;
-		width: 200px;
+		width: 300px;
 		height: calc(100% - 120px);
 		border-right: 1px solid #f1f1f1;
 		padding: 60px 20px;
+		overflow: auto;
 	}
 
 	&__tasks {
 		flex: 1;
 		padding: 60px;
+		overflow: auto;
 	}
+
+	// @media (min-width: 320px) and (max-width: 1023px) {
+	// 	&__sidebar {
+	// 		width: 45px;
+	// 		overflow: auto;
+	// 	}
+	// 	&__tasks {
+	// 		padding: 20px;
+	// 		// width: calc(100vw - 10px)
+	// 		overflow: auto;
+	// 	}
+	// }
 }
 
 .field {
@@ -78,11 +92,11 @@ body {
 	&:disabled {
 		background: #d8d8d8;
 	}
-	
+
 	&--grey {
 		background: #f4f6f8;
 		color: #444444;
-	
+
 		&:hover {
 			background: darken(#f4f6f8, 3%);
 		}
