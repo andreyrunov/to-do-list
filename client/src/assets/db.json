@@ -49,6 +49,11 @@
       "name": "354t35t34",
       "colorId": 5,
       "id": 10
+    },
+    {
+      "name": "4234",
+      "colorId": 3,
+      "id": 11
     }
   ],
   "tasks": [
@@ -187,13 +192,13 @@
     {
       "listId": 2,
       "text": "dgedrtg",
-      "completed": false,
+      "completed": true,
       "id": 30
     },
     {
       "listId": 2,
       "text": "ergheth",
-      "completed": false,
+      "completed": true,
       "id": 31
     },
     {
