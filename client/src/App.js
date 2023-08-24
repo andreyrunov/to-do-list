@@ -12,11 +12,11 @@ function App() {
 
 	useEffect(() => {
 		axios
-			.get('http://todo.runov.su:3002/lists?_expand=color&_embed=tasks')
+			.get(`${process.env.DOMAIN}/lists?_expand=color&_embed=tasks`)
 			.then(({ data }) => {
 				setLists(data)
 			})
-		axios.get('http://todo.runov.su:3002/colors').then(({ data }) => {
+		axios.get(`${process.env.DOMAIN}/colors`).then(({ data }) => {
 			setColors(data)
 		})
 	}, [])
@@ -74,7 +74,7 @@ function App() {
 		})
 		setLists(newList)
 		axios
-			.patch('http://todo.runov.su:3002/tasks/' + taskObj.id, {
+			.patch(`${process.env.DOMAIN}/tasks/` + taskObj.id, {
 				text: newTaskText,
 			})
 			.catch(() => {
@@ -92,7 +92,7 @@ function App() {
 			})
 			setLists(newList)
 			axios
-				.delete('http://todo.runov.su:3002/tasks/' + taskId, {})
+				.delete(`${process.env.DOMAIN}/tasks/` + taskId, {})
 				.catch(() => {
 					alert('Не удалось удалить задачу')
 				})
@@ -113,7 +113,7 @@ function App() {
 		})
 		setLists(newList)
 		axios
-			.patch('http://todo.runov.su:3002/tasks/' + taskId, {
+			.patch(`${process.env.DOMAIN}/tasks/` + taskId, {
 				completed,
 			})
 			.catch(() => {

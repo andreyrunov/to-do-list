@@ -22,7 +22,7 @@ function Tasks({
 		if (newTitle) {
 			onEditTitle(list.id, newTitle)
 			axios
-				.patch('http://todo.runov.su:3002/lists/' + list.id, {
+				.patch(`${process.env.DOMAIN}/lists/` + list.id, {
 					name: newTitle,
 				})
 				.catch(() => {

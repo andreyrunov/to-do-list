@@ -34,7 +34,7 @@ function AddButtonList({ colors, onAdd }) {
 		}
 		setIsLoading(true)
 		axios
-			.post('http://todo.runov.su:3002/lists', {
+			.post(`${process.env.DOMAIN}/lists`, {
 				name: inputValue,
 				colorId: selectedColor,
 			})

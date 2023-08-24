@@ -21,7 +21,7 @@ function AddTaskForm({ list, onAddTask }) {
 		}
 		setIsLoading(true)
 		axios
-			.post('http://todo.runov.su:3002/tasks', obj)
+			.post(`${process.env.DOMAIN}/tasks`, obj)
 			.then(({ data }) => {
 				onAddTask(list.id, data)
 				toggleFormVisible()
